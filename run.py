@@ -1,7 +1,8 @@
-from app import app, views
-from app.models import Nomenclature, NomenclatureType
+import app
+import app.views
+import app.models as mod
 
-typenom = NomenclatureType(10, 'Канцтовары')
-nom = Nomenclature(20, 'Карандаш', typenom)
+typenom = mod.NomenclatureType(name='Товар').save()
+nom = mod.Nomenclature(name='Карандаш простой', nomType=typenom, comment='ТМ').save()
 
-print(nom)
+app.main.run()

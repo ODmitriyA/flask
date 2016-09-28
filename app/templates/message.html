@@ -1,5 +1,13 @@
 {% extends "index.html" %}
 
 {% block message %}
-    <h2>{{ message }}</h2>
+    <table>
+        {% for nom in noms %}
+            <tr>
+                {% for col in nom._fields_ordered[1:-1] %}
+                    <td>{{ nom[col] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

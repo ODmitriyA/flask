@@ -1,11 +1,15 @@
 from flask import render_template
-from app import app
+import app
 
 
-@app.route('/')
-def index():
-    message = 'Hello, Dmitriy!'
+@app.main.route('/<p>')
+def index(p):
+    if p == 'Номенклатура':
+         noms = app.models.Nomenclature.objects
+    else:
+        noms = app.models.NomenclatureType.objects
+
     return render_template(
         'message.html',
-        message=message
+        noms = noms
     )

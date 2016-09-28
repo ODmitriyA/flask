@@ -1,31 +1,21 @@
-class Directory:
-    """Справочник"""
-    def __init__(self, code, name):
-        self.code = code
-        self.name = name
+import mongoengine as me
 
+
+class Directory(me.Document):
+    """Directory"""
+    name = me.StringField(max_length=255)
+
+    meta = {'allow_inheritance': True}
+    
     def __str__(self):
-        return '{0} - {1}'.format(str(self.code), self.name)
+        return self.name
 
 
 class NomenclatureType(Directory):
-    """Справочник - Вид номенклатуры"""
-    def __init__(self, code, name):
-        Directory.__init__(self, code, name)
-
-    def __str__(self):
-        return '{0}: {1}'.format(self.__doc__, Directory.__str__(self))
+    """Type of Nomenklature"""
 
 
 class Nomenclature(Directory):
-    """Справочник - Номенклатура"""
-    def __init__(self, code, name, nomtype):
-        Directory.__init__(self, code, name)
-        self.nomType = nomtype
-
-    def __str__(self):
-        return '{0}: {1}, ({2})'.format(
-            self.__doc__,
-            Directory.__str__(self),
-            str(self.nomType)
-            )
+    """Nomenklature"""
+    nomType = me.ReferenceField(NomenclatureType)
+    comment = me.StringField()
