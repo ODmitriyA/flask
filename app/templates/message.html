@@ -1,13 +1,17 @@
-{% extends "index.html" %}
+{% extends "base.html" -%}
 
-{% block message %}
-    <table>
-        {% for nom in noms %}
+{% block content -%}
+    <table class="table table-hover pre-scrollable">
+        {% for nom in noms -%}
             <tr>
-                {% for col in nom._fields_ordered[1:-1] %}
+                {% for col in nom._fields_ordered[1:-1] -%}
                     <td>{{ nom[col] }}</td>
-                {% endfor %}
+                {%- endfor %}
             </tr>
-        {% endfor %}
+        {%- endfor %}
     </table>
-{% endblock %}
+{%- endblock %}
+
+{% block navbar -%}
+    {{nav.top.render()}}
+{%- endblock %}
